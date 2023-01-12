@@ -1,0 +1,58 @@
+{% extends 'uhome.html' %}
+{% comment %} 44444 {% endcomment %}
+{% comment %} ass="bg-success">Registration</h1> {% endcomment %}
+{%block uhome%}
+{% if messages %}
+{%for msg in messages%}
+{%if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS%}
+<div class='alert alert-success alert-dismissible'>
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{msg}}</strong>
+</div>
+{%else%}
+<div class='alert alert-danger alert-dismissible'>
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{msg}}</strong>
+</div>
+{% endif %}
+{% endfor %}
+{%endif%}
+
+{% comment %} <img src="{% static 'image\popic.png'%}"> {% endcomment %}
+
+
+
+
+{% comment %} 4444 {% endcomment %}
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-3">
+            <div class="card-header">My Profile</div>
+            {% comment %} {%if request.user.user%} {% endcomment %}
+            <img src="{{request.user.user.popic.url}}" alt="image" class="card-img-top">
+            {% comment %} {%endif%} {% endcomment %}
+            <div class="card-body">
+                <p><b>First Name={{request.user.first_name}}</p>
+                <p><b>Last Name={{request.user.last_name}}</p>
+                <p><b>Username={{request.user.username}}</p>
+                <p><b>Email={{request.user.email}}</p>
+            </div>
+            {%if request.user.user%}
+            <div class="card-footer">
+                <p><b>Gender:{{request.user.user.gender}}</b></p>
+                <p><b>phone:{{request.user.user.phone}}</b></p>  
+            {%endif%}
+            </div>
+            </div>
+    <div class="col-4">
+        {%if request.user.user%}
+        <a href="{% url 'updatebio' request.user.user.id %}" class="nav link text-DANGER">UPDATE BIO</a>
+        {%else%}
+        <a href="{% url 'addbio' %}" class="nav link text-DANGER">ADD BIO</a></div>
+        {%endif%}   
+        <p><a href="{% url 'change-password' %}" class="nav link text-success">CHANGE</a></div></p>
+</div>
+</div>
+{%endblock uhome%}
